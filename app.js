@@ -3,10 +3,11 @@ const fs = require("fs");
 const port = 3000;
 
 const server = http.createServer(function (req, res) {
-  //status code 200
+  //define the type of file about to be rendered is a html file
   res.writeHead(200, {
     "Content-Type": "text/html",
   });
+  //using fs package read an existing file and render it
   fs.readFile("index.html", function (error, data) {
     if (error) {
       res.writeHead(404);
@@ -14,15 +15,14 @@ const server = http.createServer(function (req, res) {
     } else {
       res.write(data);
     }
-
     res.end();
   });
 });
 
 server.listen(port, function (error) {
   if (error) {
-    console.error("something isnt right", error);
+    console.error("Error", error);
   } else {
-    console.log("server listening to port: " + port);
+    console.log("Live on port: " + port);
   }
 });
